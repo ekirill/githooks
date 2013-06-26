@@ -1,0 +1,9 @@
+#!/bin/sh
+
+yellowf=$(tput setaf 3)
+reset=$(tput op)
+
+echo ${yellowf}
+pep8 `diffiles | fgrep '.py'`
+echo ${reset}
+
