@@ -11,6 +11,5 @@ githooks
 =========
 ```bash
 git clone git@github.com:ekirill/githooks.git ~/githooks 
-cd ~/githooks 
-create_symlinks <git repository path>
+~/githooks/create_symlinks <git repository path>
 ```
