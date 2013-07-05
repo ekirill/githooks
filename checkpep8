@@ -1,9 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 
 yellowf=$(tput setaf 3)
 reset=$(tput op)
 
-echo ${yellowf}
-pep8 `diffiles | fgrep '.py'`
-echo ${reset}
+filelist=(`diffiles`)
 
+# removing deleted and not python files
+for index in ${!filelist[*]}
+do
+	if [[ ${filelist[$index]} != *.py ]]; then
+		unset filelist[$index]
+	else
+		if [ ! -f ${filelist[$index]} ]; then
+			unset filelist[$index]
+		fi
+	fi
+done
+
+echo ${yellowf}
+pep8 ${filelist[*]}
+echo ${reset}

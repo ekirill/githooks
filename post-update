@@ -1,0 +1,9 @@
+#!/bin/sh
+
+find . -name "*.pyc" -exec rm -rf {} \;
+
+REP_ROOT=`git rev-parse --show-toplevel`
+if [ -f $REP_ROOT/update_requirements.py ]; then
+    $REP_ROOT/update_requirements.py
+fi
+
