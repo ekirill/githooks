@@ -44,3 +44,8 @@ if [ -f ${DEST_REPO_HOOKS}/post-commit ]; then
     mv ${DEST_REPO_HOOKS}/post-commit ${DEST_REPO_HOOKS}/post-commit.old 
 fi
 ln -s ${DIR}/post-commit $DEST_REPO_HOOKS/post-commit
+
+if [ -f ${DEST_REPO_HOOKS}/pre-commit ]; then
+    mv ${DEST_REPO_HOOKS}/pre-commit ${DEST_REPO_HOOKS}/pre-commit.old 
+fi
+ln -s ${DIR}/pre-commit $DEST_REPO_HOOKS/pre-commit
