@@ -17,6 +17,10 @@ do
 	fi
 done
 
+if [ ${#filelist[@]} = 0 ]; then
+    exit 0
+fi
+
 echo ${yellowf}
 pep8 ${filelist[*]}
 echo ${reset}
