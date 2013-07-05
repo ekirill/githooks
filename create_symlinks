@@ -25,22 +25,15 @@ if [ "$(which checkpep8)" == '' ]; then
 fi
 
 echo "creating symlinks in $DEST_REPO_HOOKS"
-if [ -f ${DEST_REPO_HOOKS}/post-checkout ]; then
-    mv ${DEST_REPO_HOOKS}/post-checkout ${DEST_REPO_HOOKS}/post-checkout.old 
-fi
-ln -s ${DIR}/post-checkout ${DEST_REPO_HOOKS}/post-checkout
 
-if [ -f ${DEST_REPO_HOOKS}/post-update ]; then
-    mv ${DEST_REPO_HOOKS}/post-update ${DEST_REPO_HOOKS}/post-update.old 
-fi
-ln -s ${DIR}/post-update ${DEST_REPO_HOOKS}/post-update
+make_link() {
+    if [ -f ${DEST_REPO_HOOKS}/$1 ]; then
+        mv ${DEST_REPO_HOOKS}/$1 ${DEST_REPO_HOOKS}/$1.old
+    fi
+    ln -s ${DIR}/$1 ${DEST_REPO_HOOKS}/$1
+}
 
-if [ -f ${DEST_REPO_HOOKS}/post-merge ]; then
-    mv ${DEST_REPO_HOOKS}/post-merge ${DEST_REPO_HOOKS}/post-merge.old 
-fi
-ln -s ${DIR}/post-merge $DEST_REPO_HOOKS/post-merge
-
-if [ -f ${DEST_REPO_HOOKS}/post-commit ]; then
-    mv ${DEST_REPO_HOOKS}/post-commit ${DEST_REPO_HOOKS}/post-commit.old 
-fi
-ln -s ${DIR}/post-commit $DEST_REPO_HOOKS/post-commit
+make_link post-checkout
+make_link post-update
+make_link post-merge
+make_link post-commit
