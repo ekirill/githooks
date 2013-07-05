@@ -1,9 +1,4 @@
 #!/bin/sh
 
-CURR_BRANCH=`git rev-parse --abbrev-ref HEAD`
-
-git checkout master 2> /dev/null > /dev/null
-git pull 2> /dev/null > /dev/null
-git checkout $CURR_BRANCH 2> /dev/null > /dev/null
-git diff --name-only master
-
+git fetch --prune 2> /dev/null > /dev/null
+git diff --name-only origin/master
