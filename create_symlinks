@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 DEST_REPO=$1
 if [ "$DEST_REPO" == '' ]; then
@@ -11,17 +11,17 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 if [[ $DEST_REPO == */ ]]; then
     DEST_REPO_HOOKS=$DEST_REPO.git/hooks
 else
-    DEST_REPO_HOOKS=$DEST_REPO/.git/hooks 
+    DEST_REPO_HOOKS=$DEST_REPO/.git/hooks
 fi
 
 if [ "$(which diffiles)" == '' ]; then
     echo 'diffiles not found in PATH, creating symlink to /usr/bin'
-    sudo ln -s ${DIR}/diffiles /usr/bin/diffiles 
+    sudo ln -s ${DIR}/diffiles /usr/bin/diffiles
 fi
 
 if [ "$(which checkpep8)" == '' ]; then
     echo 'checkpep8 not found in PATH, creating symlink to /usr/bin'
-    sudo ln -s ${DIR}/checkpep8 /usr/bin/checkpep8 
+    sudo ln -s ${DIR}/checkpep8 /usr/bin/checkpep8
 fi
 
 echo "creating symlinks in $DEST_REPO_HOOKS"
