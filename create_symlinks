@@ -37,3 +37,4 @@ make_link post-checkout
 make_link post-update
 make_link post-merge
 make_link post-commit
+make_link prepare-commit-msg

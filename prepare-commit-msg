@@ -1,0 +1,8 @@
+#!/bin/bash
+
+branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+
+if [[ "$branch" == "master" ]]; then
+	echo "Commiting to master is prohibited!"
+	exit 1
+fi
