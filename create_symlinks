@@ -16,12 +16,12 @@ fi
 
 if [ "$(which diffiles)" == '' ]; then
     echo 'diffiles not found in PATH, creating symlink to /usr/bin'
-    sudo ln -s ${DIR}/diffiles /usr/bin/diffiles
+    sudo ln -s ${DIR}/diffiles /usr/local/bin/diffiles
 fi
 
 if [ "$(which checkpep8)" == '' ]; then
     echo 'checkpep8 not found in PATH, creating symlink to /usr/bin'
-    sudo ln -s ${DIR}/checkpep8 /usr/bin/checkpep8
+    sudo ln -s ${DIR}/checkpep8 /usr/local/bin/checkpep8
 fi
 
 echo "creating symlinks in $DEST_REPO_HOOKS"
