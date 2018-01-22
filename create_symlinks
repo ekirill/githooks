@@ -24,6 +24,16 @@ if [ "$(which checkpep8)" == '' ]; then
     sudo ln -s ${DIR}/checkpep8 /usr/local/bin/checkpep8
 fi
 
+if ! [ -x "$(command -v pycodestyle)" ]; then
+    if ! [ -x "$(command -v pep8)" ]; then
+        echo "WARNING: please install pycodestyle or pep8 (pip install pycodestyle)"
+    fi
+fi
+
+if ! [ -x "$(command -v pyflakes)" ]; then
+    echo "WARNING: please install pyflakes (pip install pyflakes)"
+fi
+
 echo "creating symlinks in $DEST_REPO_HOOKS"
 
 make_link() {

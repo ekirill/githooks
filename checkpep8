@@ -4,10 +4,10 @@ yellowf=$(tput setaf 3)
 reset=$(tput op)
 
 filelist=(`diffiles`)
+gitroot=(`git rev-parse --show-toplevel`)
 
 # removing deleted and not python files
-for index in ${!filelist[*]}
-do
+for index in ${!filelist[*]}; do
 	if [[ ${filelist[$index]} != *.py ]]; then
 		unset filelist[$index]
 	else
@@ -17,10 +17,31 @@ do
 	fi
 done
 
+if [ -e "${gitroot}/nopep8.txt" ]; then
+	nopep8_list=(`cat "${gitroot}/nopep8.txt"`)
+	for nopep_index in ${!nopep8_list[*]}; do
+		nopep_fname=${nopep8_list[$nopep_index]}
+		for index in ${!filelist[*]}; do
+			src_fname=${filelist[$index]}
+			if [[ "${nopep_fname}" == "${src_fname}" ]]; then
+				echo "Skipping pep8 for ${src_fname}"
+				unset filelist[$index]
+			fi
+		done
+	done
+fi
+
 if [ ${#filelist[@]} = 0 ]; then
     exit 0
 fi
 
+echo "Validating: ${filelist[@]}"
+
 echo ${yellowf}
-pep8 ${filelist[*]}
+if [ -x "$(command -v pycodestyle)" ]; then
+	pycodestyle ${filelist[*]}
+else
+	pep8 ${filelist[*]}
+fi
+pyflakes ${filelist[*]}
 echo ${reset}
